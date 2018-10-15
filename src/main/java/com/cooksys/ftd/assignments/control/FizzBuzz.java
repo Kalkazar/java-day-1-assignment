@@ -1,5 +1,7 @@
 package com.cooksys.ftd.assignments.control;
 
+import java.util.Arrays;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -26,7 +28,10 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if b is zero
      */
     public static boolean divides(int a, int b) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (b==0) {
+        	throw new IllegalArgumentException("ERROR: cannot divide by zero");
+        }
+        return a%b==0;
     }
 
     /**
@@ -41,7 +46,10 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-        throw new NotImplementedException();
+    	String result = String.valueOf(n)+": ";
+        if (n%3==0) result += "Fizz";
+        if (n%5==0) result += "Buzz";
+        return (n%3!=0 && n%5!=0) ? null : result;
     }
 
     /**
@@ -55,7 +63,23 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if the given end is less than the given start
      */
     public static String[] messages(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if(end<start) {
+        	throw new IllegalArgumentException("ERROR: the given end cannot be less than the given start");
+        }
+    	int[] numbers = new int[end-start];
+    	int nullCount = 0;
+        for(int i = 0; i < numbers.length; i++) {
+        	if(message(i+start)==null) {
+        		nullCount++;
+        	} else {
+        		numbers[i-nullCount] = i+start;
+        	}
+        }
+        String[] messages = new String[end-start-nullCount];
+        for(int i = 0; i < messages.length; i++) {
+        	messages[i] = message(numbers[i]);
+        }
+        return messages;
     }
 
     /**
@@ -63,7 +87,10 @@ public class FizzBuzz {
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new NotImplementedException();
+    	String[] fizzBuzzArray = messages(1,115);
+    	for (String fizzBuzz : fizzBuzzArray) {
+    		System.out.println(fizzBuzz);
+    	}
     }
 
 }

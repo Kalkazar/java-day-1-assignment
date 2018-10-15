@@ -1,5 +1,7 @@
 package com.cooksys.ftd.assignments.control;
 
+import java.util.Arrays;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -24,7 +26,11 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given index is less than zero
      */
     public static int atIndex(int i) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(i<0) {
+    		throw new IllegalArgumentException("ERROR: input cannot be less than zero");
+    	}
+    	int[] fullfib = fibonacci(i+1);
+    	return fullfib[i];
     }
 
     /**
@@ -38,7 +44,15 @@ public class Fibonacci {
      *                                  given end is less than the given start
      */
     public static int[] slice(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(start<0 || end<0) {
+    		throw new IllegalArgumentException("ERROR: inputs cannot be less than zero");
+    	}
+    	int[] fullfib = fibonacci(end);
+    	int[] slice = new int[end-start];
+    	for (int i = 0; i < end-start; i++) {
+    		slice[i] = fullfib[start+i];
+    	}
+    	return slice;
     }
 
     /**
@@ -49,6 +63,14 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given count is negative
      */
     public static int[] fibonacci(int count) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if(count<0) {
+    		throw new IllegalArgumentException("ERROR: count cannot be less than zero");
+    	}
+    	int[] fib = new int[count];
+    	Arrays.fill(fib, 1);
+    	for(int i = 2; i < count; i++) {
+    		fib[i] = fib[i-1] + fib[i-2];
+    	}
+    	return fib;
     }
 }
